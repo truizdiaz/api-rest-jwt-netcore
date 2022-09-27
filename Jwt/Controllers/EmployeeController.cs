@@ -1,4 +1,5 @@
 ﻿using Jwt.Constants;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,6 +11,7 @@ namespace Jwt.Controllers
     {
 
         [HttpGet]
+        [Authorize(Roles = ("Administrador"))]
         public IActionResult Get()
         {
             var listEmployee = EmployeeConstants.Employees;
