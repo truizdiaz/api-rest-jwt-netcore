@@ -57,24 +57,23 @@ namespace Jwt.Controllers
 
             // Crear los claims
             var claims = new[]
-                    {
-                        new Claim(ClaimTypes.NameIdentifier, user.Username),
-                        new Claim(ClaimTypes.Email, user.EmailAddress),
-                        new Claim(ClaimTypes.GivenName, user.FirstName),
-                        new Claim(ClaimTypes.Surname, user.LastName),
-                        new Claim(ClaimTypes.Role, user.Rol),
-                        new Claim("idEmpresa", "141")
-                    };
+            {
+                new Claim(ClaimTypes.NameIdentifier, user.Username),
+                new Claim(ClaimTypes.Email, user.EmailAddress),
+                new Claim(ClaimTypes.GivenName, user.FirstName),
+                new Claim(ClaimTypes.Surname, user.LastName),
+                new Claim(ClaimTypes.Role, user.Rol),
+            };
 
 
             // Crear el token
 
             var token = new JwtSecurityToken(
-                            _config["Jwt:Issuer"],
-                            _config["Jwt:Audience"],
-                            claims,
-                            expires: DateTime.Now.AddMinutes(60),
-                            signingCredentials: credentials);
+                _config["Jwt:Issuer"],
+                _config["Jwt:Audience"],
+                claims,
+                expires: DateTime.Now.AddMinutes(60),
+                signingCredentials: credentials);
 
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
